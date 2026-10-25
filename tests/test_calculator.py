@@ -3,6 +3,8 @@ import pytest
 from src.calculator import calculate_average, factorial, find_maximum, is_prime, power
 
 
+# Average tests cover rounding, supported sequence types, and validation of
+# empty inputs, out-of-range scores, and invalid score values.
 @pytest.mark.parametrize(
     ("scores", "expected"),
     [
@@ -41,6 +43,8 @@ def test_calculate_average_rejects_non_numeric_scores(score):
         calculate_average([score])
 
 
+# Maximum tests verify results for positive, negative, duplicate, and decimal
+# values, along with the errors raised for empty or invalid input.
 @pytest.mark.parametrize(
     ("numbers", "expected"),
     [
@@ -74,6 +78,8 @@ def test_find_maximum_rejects_non_numeric_elements(number):
         find_maximum([number])
 
 
+# Primality tests check values at and below the lower boundary, known primes,
+# composite numbers, and rejection of values that are not integers.
 @pytest.mark.parametrize("number", [-10, -1, 0, 1])
 def test_is_prime_returns_false_for_numbers_at_most_one(number):
     assert is_prime(number) is False
@@ -95,6 +101,8 @@ def test_is_prime_rejects_non_integer_input(number):
         is_prime(number)
 
 
+# Factorial tests cover base cases and ordinary non-negative inputs, while
+# confirming that negative and non-integer arguments raise the expected errors.
 @pytest.mark.parametrize(("number", "expected"), [(0, 1), (1, 1), (5, 120), (7, 5040)])
 def test_factorial_calculates_non_negative_integer_factorials(number, expected):
     assert factorial(number) == expected
@@ -111,6 +119,8 @@ def test_factorial_rejects_non_integer_input(number):
         factorial(number)
 
 
+# Power tests exercise positive, zero, negative, and fractional-base cases,
+# plus invalid arguments and the undefined zero-to-negative case.
 @pytest.mark.parametrize(
     ("base", "exponent", "expected"),
     [

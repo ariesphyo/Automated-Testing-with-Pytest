@@ -44,7 +44,7 @@
 
 ## Section 4: Deployed and Presentation Information
 - **GitHub Repository URL:** https://github.com/ariesphyo/Automated-Testing-with-Pytest
-- **Video Presentation Link:** Pending: record and upload the required 5–7 minute presentation.
+- **Video Presentation Link:** https://drive.google.com/file/d/1zIVGiCFmjKble1-9agE5n17pqU9YKXxU/view?usp=drive_link
 
 ---
 

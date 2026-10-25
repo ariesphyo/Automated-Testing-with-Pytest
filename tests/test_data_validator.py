@@ -14,6 +14,8 @@ from src.data_validator import (
 )
 
 
+# Email tests cover accepted address formats, malformed addresses, and
+# rejection of inputs that are not strings.
 @pytest.mark.parametrize(
     "email",
     [
@@ -51,6 +53,8 @@ def test_validate_email_rejects_non_string_input(email):
         validate_email(email)
 
 
+# Password tests check that valid passwords satisfy every rule and that each
+# individual strength requirement reports a clear error for invalid input.
 @pytest.mark.parametrize(
     "password",
     [
@@ -86,6 +90,8 @@ def test_validate_password_rejects_non_string_input(password):
         validate_password(password)
 
 
+# Username tests verify allowed names, length and character constraints, and
+# the expected type error for non-string values.
 @pytest.mark.parametrize("username", ["abc", "A_1", "User_123", "a" * 20])
 def test_validate_username_accepts_valid_usernames(username):
     assert validate_username(username) is True
@@ -114,6 +120,8 @@ def test_validate_username_rejects_non_string_input(username):
         validate_username(username)
 
 
+# Age tests cover both inclusive age limits and rejection of out-of-range or
+# non-integer values, including booleans.
 @pytest.mark.parametrize("age", [13, 25, 120])
 def test_validate_age_accepts_ages_inclusive_of_bounds(age):
     assert validate_age(age) is True
@@ -134,6 +142,8 @@ def test_validate_age_rejects_non_integer_and_boolean_inputs(age):
         validate_age(age)
 
 
+# Registration tests check valid payloads, missing fields, field-level error
+# propagation, and rejection of payloads that are not dictionaries.
 def test_validate_registration_accepts_valid_payload():
     data = {
         "username": "valid_user",

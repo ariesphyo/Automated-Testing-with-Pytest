@@ -3,6 +3,8 @@ import pytest
 from src.student_manager import Student, StudentManager
 
 
+# Student tests verify initialization and identity validation, including
+# ensuring each instance maintains its own grades.
 def test_student_initializes_attributes_and_independent_grades(sample_student):
     assert sample_student.student_id == "S001"
     assert sample_student.name == "Ada Lovelace"
@@ -31,6 +33,8 @@ def test_student_rejects_invalid_identity_attributes(student_id, name, email):
         Student(student_id, name, email)
 
 
+# Grade tests cover accepted score bounds and course codes, reject invalid
+# values, and verify GPA conversion, averaging, and the no-grades result.
 @pytest.mark.parametrize(("score", "expected"), [(0, 0.0), (100, 100.0), (82.5, 82.5)])
 def test_student_add_grade_accepts_scores_inclusive_of_bounds(
     sample_student, score, expected
@@ -77,6 +81,8 @@ def test_student_gpa_is_zero_without_grades(sample_student):
     assert sample_student.get_gpa() == 0.0
 
 
+# Manager tests exercise empty state, both supported ways to add students,
+# required arguments, invalid inputs, and duplicate-ID protection.
 def test_empty_manager_starts_with_no_students(empty_manager):
     assert empty_manager.get_total_students() == 0
     assert empty_manager.get_all_students() == []
@@ -131,6 +137,8 @@ def test_student_manager_get_student_raises_for_unknown_id(empty_manager):
         empty_manager.get_student("missing")
 
 
+# Update and removal tests verify grade changes are reflected in GPA, student
+# counts stay accurate, and unknown student IDs raise clear errors.
 def test_student_manager_updates_grade_and_returns_updated_gpa(empty_manager):
     empty_manager.add_student("S001", "Ada Lovelace", "ada@example.com")
 
@@ -158,6 +166,8 @@ def test_student_manager_remove_unknown_student_raises_key_error(empty_manager):
         empty_manager.remove_student("missing")
 
 
+# Ranking and filtering tests check ordering, result limits, empty/boundary
+# behavior, tie-breaking, and validation of the minimum-GPA threshold.
 def test_populated_manager_ranks_students_and_respects_top_performer_limit(
     populated_manager,
 ):
